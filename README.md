@@ -20,37 +20,10 @@ Or from the terminal:
 curl https://sse-fake.andros.dev/events/
 ```
 
-## Events
+## Docs (events)
 
-Between 1 to 5 seconds, you will randomly receive one of the following messages:
+https://sse-fake.andros.dev/
 
-- User connected
-
-``` javascript
-{
-	"action": "User connected",
-	"name": [random name]
-}
-```
-
-- User disconnected
-
-``` javascript
-{
-	"action": "User disconnected",
-	"name": [random name]
-}
-```
-
-- New message
-
-``` javascript
-{
-	"action": "New message",
-	"name": [random name],
-	"text": [random text]
-}
-```
 
 Made with ♥️, Django, Channels and Django EventStream.
 
