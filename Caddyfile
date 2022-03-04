@@ -1,0 +1,19 @@
+sse-fake.andros.dev {
+
+    root * /usr/src/app/
+
+    @notEvents {
+      not path /events/
+    }
+
+    encode @notEvents gzip
+
+    @notStatic {
+      not path /static/* /media/*
+    }
+
+    reverse_proxy @notStatic django:8000
+
+    file_server /static/*
+    file_server /media/*
+}

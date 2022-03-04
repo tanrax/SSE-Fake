@@ -1,0 +1,24 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 2rem 0;
+}
+
+.container {
+    max-width: 47rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.header {
+    text-align: center;
+}
+
+a {
+    color: #0074d9;
+    text-decoration: none;
+}
+
+.footer {
+    margin-top: 5rem;
+    text-align: center;
+}

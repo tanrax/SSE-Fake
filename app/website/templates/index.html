@@ -1,0 +1,95 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>SSE Fake</title>
+    <meta name="description" content="Free fake Server-side Events for testing and prototyping.">
+    <!-- PrismJS -->
+    <link href="{% static 'css/prism.css' %}" rel="stylesheet" />
+    <script defer src="{% static 'js/prism.js' %}"></script>
+    <!-- End PrismJS -->
+    <!-- NotifyJS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <!-- End NotifyJS -->
+    <!-- Custom CSS and JS-->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script defer src="{% static 'js/index.js' %}"></script>
+    <!-- End Custom CSS and JS-->
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="//matomo.andros.dev/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '8']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 id="sse-fake">SSE Fake</h1>
+            <p>Free fake Server-side Events for testing and prototyping.</p>
+        </header>
+        <main>
+            <h2 id="try-it">Try it</h2>
+            <p>Run this code here, in a console or from any site:</p>
+            <pre>
+                <code class="language-javascript">
+    const sse = new EventSource("https://sse-fake.andros.dev/events/");
+
+    sse.onmessage = function(event) {
+      console.log(event.data);
+    }</code>
+            </pre>
+            <p>Or from the terminal:</p>
+            <pre>
+                <code class="language-bash">
+    curl https://sse-fake.andros.dev/events/</code>
+            </pre>
+            <h2 id="events">Events</h2>
+            <p>Between 1 to 5 seconds, you will randomly receive one of the following messages:</p>
+            <h3>User connected</h3>
+            <pre>
+                <code class="lang-javascript">
+    {
+        "action": "User connected",
+        "name": [random name]
+    }</code>
+            </pre>
+            <h3>User disconnected</h3>
+            <pre>
+                <code class="lang-javascript">
+    {
+        "action": "User disconnected",
+        "name": [random name]
+    }</code>
+            </pre>
+            <h3>New message</h3>
+            <pre>
+                <code class="lang-javascript">
+    {
+        "action": "New message",
+        "name": [random name],
+        "text": [random text]
+    }</code>
+            </pre>
+        </main>
+        <footer class="footer">
+            <p>Made with ♥️, Django, Channels and Django EventStream.</p>
+            <p>Source: <a href="https://github.com/tanrax/SSE-Fake" target="_blank">GitHub</a></p>
+            <p>Author: <a href="https://andros.dev" target="_blank">Andros Fenollosa</a></p>
+        </footer>
+    </div>
+</body>
+</html>

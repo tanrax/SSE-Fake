@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+
+  django:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    entrypoint: bash ./django-launcher.sh
+    volumes:
+      - .:/usr/src/app/
+    environment:
+      DEBUG: "False"
+      ALLOWED_HOSTS: "sse-fake.andros.dev"
+      SECRET_KEY: mysecret
+      DOMAIN: sse-fake.andros.dev
+      DOMAIN_URL: https://sse-fake.andros.dev
+      DB_ENGINE: django.db.backends.sqlite3
+      DB_NAME: ":memory:"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      STATIC_URL: /static/
+      STATIC_ROOT: static
+      MEDIA_URL: /media/
+    expose:
+      - 8000
+    depends_on:
+      - redis
+
+  redis:
+    restart: always
+    image: redis:alpine
+    expose:
+      - 6379
+
+  caddy:
+    restart: always
+    image: caddy:alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - .:/usr/src/app/
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy_data:/data
+    depends_on:
+      - django
