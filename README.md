@@ -24,6 +24,7 @@ curl https://sse-fake.andros.dev/events/
 
 https://sse-fake.andros.dev/
 
+---
 
 Made with ♥️, Django, Channels and Django EventStream.
 
