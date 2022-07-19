@@ -1,6 +1,6 @@
 # SSE Fake
 
-Free fake Server-side Events for testing and prototyping.
+Free fake Server-send Events for testing and prototyping.
 
 ## Try it
 
