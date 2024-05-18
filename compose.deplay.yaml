@@ -1,0 +1,45 @@
+
+services:
+
+  django:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    entrypoint: bash ./django-launcher.sh
+    volumes:
+      - .:/usr/src/app/
+    environment:
+      DEBUG: "False"
+      ALLOWED_HOSTS: "*"
+      SECRET_KEY: mysecret
+      DOMAIN: sse-fake.andros.dev
+      DOMAIN_URL: https://sse-fake.andros.dev
+      DB_ENGINE: django.db.backends.sqlite3
+      DB_NAME: ":memory:"
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      STATIC_URL: /static/
+      STATIC_ROOT: static
+      MEDIA_URL: /media/
+    expose:
+      - 8000
+    depends_on:
+      - redis
+      - nginx
+
+  redis:
+    restart: always
+    image: redis:alpine
+    expose:
+      - 6379
+
+  nginx:
+    restart: always
+    image: nginx:alpine
+    ports:
+      - 8100:80
+    volumes:
+      - ./static:/var/www/static
+      - ./media:/var/www/media
+      - ./nginx.conf:/etc/nginx/nginx.conf
